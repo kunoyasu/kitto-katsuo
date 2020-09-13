@@ -1,9 +1,8 @@
 class TicketsController < ApplicationController
-
   before_action :set_item, only: [:edit, :show, :update, :destroy]
 
   def index
-      @tickets = Ticket.includes(:user).order('created_at DESC')
+    @tickets = Ticket.includes(:user).order('created_at DESC')
   end
   
 
@@ -43,6 +42,8 @@ class TicketsController < ApplicationController
     end
   end
             
+  private
+
   def ticket_params
     params.require(:ticket).permit(:name,:image, :introduction,:category_id).merge(user_id: current_user.id)
   end
@@ -54,6 +55,5 @@ class TicketsController < ApplicationController
   def update_params
       params.require(:ticket).permit(:name,:image, :introduction, :category_id)[:image_url, :id]
   end
-
 
 end

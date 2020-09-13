@@ -7,6 +7,30 @@ class UsersController < ApplicationController
   end
 
   def show
+   @currentUserEntry=Entry.where(user_id: current_user.id)
+    #current_user情報をEntriesテーブルに送る。
+    @userEntry=Entry.where(user_id: current_user.id)
+    #DMを送る対象のユーザーをEntriesテーブルから探す
+    unless current_user.id == @user.id
+    #DMを送る対象は自分にはできないこととする。
+      @currentUserEntry.each do |cu|
+        @userEntry.each do |u|
+          if cu.room_id == u.room_id then
+            @isRoom = true
+            #すでにチケットとuser間でroomがあった際
+            @roomId = cu.room_id
+            #そのルームIDを取り出す
+          end
+        end
+      end
+    end
+
+      unless @isRoom
+      #すでにチケットとuser間でroomがなかった際
+        @room = Room.new
+        @entry = Entry.new
+      #roomとentryを新規に作成する
+       end
   end
 
 

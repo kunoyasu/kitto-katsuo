@@ -1,4 +1,3 @@
-
 <%# 商品の概要 %>
 <div class="item-show">
   <div class="item-box">
@@ -16,9 +15,8 @@
       <p class='or-text'>or</p>
       <%= link_to '削除', ticket_path(@ticket.id) , method: :delete, class:'item-destroy' %>
     <%elsif%>
-      <%= link_to 'チャット画面に進む', ticket_orders_path(@ticket.id) ,method: :get, class:"item-red-btn"%>
+      <%= link_to 'チャット画面に進む', user_path(current_user) ,method: :get, class:"item-red-btn"%>
     <%end%>
-
     <div class="item-explain-box">
       <span><%= @ticket.introduction %></span>
     </div>
@@ -26,7 +24,7 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @ticket.user.nickname %></td>
+          <td class="detail-value"><%= @ticket.user.nickname%></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
@@ -45,8 +43,6 @@
       </div>
     </div>
   </div>
-  <%# /商品の概要 %>
-
   <div class="comment-box">
     <form>
       <textarea class="comment-text"></textarea>
